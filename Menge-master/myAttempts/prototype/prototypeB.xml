@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<BFSM>
+
+		<GoalSet id="0">
+			<Goal type="circle" id="0" x="0" y="17" radius="0.2"/>
+		</GoalSet>
+
+		<State name="Escape" final="0" >
+			<GoalSelector type="explicit" goal_set="0" goal="0" />
+			<VelComponent type="goal" weight="1.0" />
+		</State>
+		<State name="Safe" final="1" />
+
+		<Transition from="Escape" to="Safe" >
+			<Condition type="goal_reached" distance="0.2" />
+		</Transition>
+</BFSM>
