@@ -21,20 +21,20 @@ class FlowLine ( Segment ):
         for agt in self.agents:
             s += '\n\t\t%s' % agt
         return s
-    
+
     def computeCoefficients( self ):
         """Computes the coefficients of the implicit equation"""
         disp = self.p2 - self.p1
         segLen = disp.magnitude()
         norm = disp / segLen
-        
+
         A = -norm.y
         B = norm.x
 
         self.coef.z = -( A * self.p1.x + B * self.p1.y )
         self.coef.x = A
         self.coef.y = B
-        
+
     def step( self ):
         """Computes the flow for the next step"""
         # transfer agents
@@ -57,7 +57,7 @@ class FlowLine ( Segment ):
     def transferAgents( self, agentList ):
         """Adds a list of agents to this line's transfer list"""
         self.transferedAgents += agentList
-        
+
     def addAgent( self, agt ):
         """Add an agent to the agent list -- only used during initialization.
         Don't use this to transfer an agent from one line to another"""
@@ -74,7 +74,7 @@ class FlowLineRegion:
         s = 'Flow Line Region:'
         for line in self.lines:
             s += '\n\t%s' % line
-        return s        
+        return s
 
     def addLine( self, p1, p2 ):
         """Add's a line to the set"""
@@ -95,7 +95,7 @@ class FlowLineRegion:
         for i, line in enumerate( self.lines ):
             line.nextLine = self.lines[ (i + 1) % lineCount ]
         assert( self.lines[0] == self.lines[-1].nextLine )
-        
+
         self.sorted = True
 
     def sortAgents( self, agents ):
@@ -129,15 +129,15 @@ class FlowLineRegion:
                         if ( ( dist1 > 0 and dist2 < 0 ) or
                              ( dist1 < 0 and dist2 > 0 ) ):
                             hits += 1
-                        
+
                 if ( hits % 2 ):
                     sign1 = l1.coef.dot( Vector3( pos.x, pos.y, 1 ) )
                     if ( sign1 > 0 ):
                         l2.addAgent( agt )
                     else:
-                        l1.addAgent( agt )                    
-                l1 = l2            
-            
+                        l1.addAgent( agt )
+                l1 = l2
+
 
     def step( self ):
         """Perform next computation time step of flow"""
@@ -154,8 +154,9 @@ class FlowLineRegion:
             s = ''
             for line in self.lines:
                 s += '%d ' % line.flowCounts[ i ]
+                s += 'helloooooo'
             file.write( '%s\n' % s )
-            
+
 
 if __name__ == '__main__':
     lines = FlowLineRegion()
@@ -181,4 +182,3 @@ if __name__ == '__main__':
     agts = (a1, a2, a3, a4)
     lines.sortAgents( agts )
     print lines
-        

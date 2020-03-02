@@ -73,7 +73,7 @@ def writeAnalysisProject( tasks, fileName ):
     for task in tasks:
         task.writeConfig( file )
     file.close()
-       
+
 def readAnalysisProject( fileName ):
     '''Reads an analysis project file and returns a list of tasks.
 
@@ -92,24 +92,24 @@ def readAnalysisProject( fileName ):
     except:
         self.rsrc.logger.error( "Error parsing task count" )
         raise ValueError
-    
+
     if ( len( tokens ) != 2 or tokens[0] != 'Task count' ):
         self.rsrc.logger.error( 'Expected to see "Task count" in configuration file, found %s' % ( tokens[0] ) )
         raise ValueError
     taskCount = int( tokens[1] )
 
-    tasks = []    
+    tasks = []
     for i in xrange( taskCount ):
         taskType = file.readline().strip()
         TaskClass = getTaskClass( taskType )
         task = TaskClass()
         task.readConfig( file )
-        tasks.append( task )  
-    
+        tasks.append( task )
+
     file.close()
-    
+
     return tasks
-    
+
 class AnalysisTask:
     # Work to be performed by the task
     NO_WORK = 0
@@ -146,7 +146,7 @@ class AnalysisTask:
         keys = self.WORK_STRINGS.keys()
         keys.sort()
         return [ AnalysisTask.WORK_STRINGS[ k ] for k in keys ]
-    
+
     def __init__( self ):
         '''Constructor for basic Analysis Task.
 
@@ -215,7 +215,7 @@ class AnalysisTask:
         @param      state       A boolean.  True if the task is to be evaluated, False otherwise.
         '''
         self.active = state
-        
+
     def execute( self ):
         '''Execute the task'''
         raise NotImplementedError
@@ -255,27 +255,33 @@ class AnalysisTask:
         try:
             tokens = map( lambda x: x.strip(), line.split( '||' ) )
         except:
-            self.rsrc.logger.error( "Error parsing key %s" % name )
-            self.rsrc.logger.error( '\tRead: %s' % line )
+            # self.rsrc.logger.error( "Error parsing key %s" % name )
+            # self.rsrc.logger.error( '\tRead: %s' % line )
             raise ValueError, "Couldn't identify key-value pair in line"
         if ( len( tokens ) != 2 ):
-            self.rsrc.logger.error( "Too many values found for key: %s" % ( name ) )
-            self.rsrc.logger.error( '\tRead: %s' % line )
+            # self.rsrc.logger.error( "Too many values found for key: %s" % ( name ) )
+            # self.rsrc.logger.error( '\tRead: %s' % line )
             raise ValueError, "Too many values to form a key-value pair"
         if ( tokens[0] != name ):
-            self.rsrc.logger.error( "Looking for key %s, found %s" % ( name, tokens[0] ) )
-            self.rsrc.logger.error( '\tRead: %s' % line )
+            # self.rsrc.logger.error( "Looking for key %s, found %s" % ( name, tokens[0] ) )
+            # self.rsrc.logger.error( '\tRead: %s' % line )
+            print( "Fail. Looking for key %s, found %s" % ( name, tokens[0] ) )
+            print( '\tRead: %s' % line )
+
             raise ValueError, "Found wrong key value"
+        if ( tokens[0] == name ):
+            print( "Success. Looking for key %s, found %s" % ( name, tokens[0] ) )
+            print( '\tRead: %s' % line )
         value = tokens[1]
         if ( convertFunc ):
             try:
                 value = convertFunc( value )
-            except ValueError as e: 
-                self.rsrc.logger.error( "Error converting the value for %s: %s" % ( name, value ) )
-                self.rsrc.logger.error( '\tRead: %s' % line )
+            except ValueError as e:
+                # self.rsrc.logger.error( "Error converting the value for %s: %s" % ( name, value ) )
+                # self.rsrc.logger.error( '\tRead: %s' % line )
                 raise e
         return value
-    
+
     def readConfig( self, file ):
         '''Reads the common TaskWidget parameters from the file'''
         # I/O info
@@ -284,17 +290,17 @@ class AnalysisTask:
             self.scbName = self._parseConfigLine( file, 'SCB' )
         except ValueError:
             active = False
-            
+
         try:
             self.timeStep = self._parseConfigLine( file, 'timeStep', float )
         except ValueError:
             active = False
-            
+
         try:
              self.obstName = self._parseConfigLine( file, 'obstacle' )
         except ValueError:
             active = False
-            
+
         try:
             self.workFldr = self._parseConfigLine( file, 'outFldr' )
         except ValueError:
@@ -305,12 +311,12 @@ class AnalysisTask:
             self.workName = self._parseConfigLine( file, 'workName' )
         except ValueError:
             active = False
-            
+
         try:
             self.work = self._parseConfigLine( file, 'task', self.taskStringID )
         except ValueError:
             active = False
-            
+
         def isActive( txt ):
             return txt == '1'
         self.active = self._parseConfigLine( file, 'active', isActive ) and active
@@ -367,7 +373,7 @@ class DomainAnalysisTask( AnalysisTask ):
         minY = self._parseConfigLine( file, 'minPtY', float )
         w = self._parseConfigLine( file, 'sizeX', float )
         h = self._parseConfigLine( file, 'sizeY', float )
-        self.setDomain( minX, minY, minX + w, minY + h )   
+        self.setDomain( minX, minY, minX + w, minY + h )
 
     def writeConfig( self, file ):
         AnalysisTask.writeConfig( self, file )
@@ -375,7 +381,7 @@ class DomainAnalysisTask( AnalysisTask ):
         file.write( 'minPtX || %.5f\n' % ( self.domainX[0] ) )
         file.write( 'minPtY || %.5f\n' % ( self.domainY[0] ) )
         file.write( 'sizeX || %.5f\n' % ( self.domainX[1] - self.domainX[0] ) )
-        file.write( 'sizeY || %.5f\n' % ( self.domainY[1] - self.domainY[0] ) )        
+        file.write( 'sizeY || %.5f\n' % ( self.domainY[1] - self.domainY[0] ) )
 
 class DiscreteAnalysisTask( DomainAnalysisTask ):
     '''An analysis task which relies on a discretization of a domain'''
@@ -419,15 +425,15 @@ class DiscreteAnalysisTask( DomainAnalysisTask ):
         DomainAnalysisTask.readConfig( self, file )
         self.cellSize = self._parseConfigLine( file, 'cellSize', float )
         self.colorMapName = self._parseConfigLine( file, 'colorMap' )
-        self.outImgType = self._parseConfigLine( file, 'imgType' )  
+        self.outImgType = self._parseConfigLine( file, 'imgType' )
 
     def writeConfig( self, file ):
         DomainAnalysisTask.writeConfig( self, file )
         # raster properties
         file.write( 'cellSize || %.5f\n' % ( self.cellSize ) )
         file.write( 'colorMap || %s\n' % ( self.colorMapName ) )
-        file.write( 'imgType || %s\n' % ( self.outImgType ) ) 
-    
+        file.write( 'imgType || %s\n' % ( self.outImgType ) )
+
 class DensityAnalysisTask( DiscreteAnalysisTask ):
     def __init__( self ):
         DiscreteAnalysisTask.__init__( self )
@@ -456,7 +462,7 @@ class DensityAnalysisTask( DiscreteAnalysisTask ):
                 domain = makeDomain( self.domainX, self.domainY, self.cellSize )
                 sigDomain = makeDomain( self.domainX, self.domainY )
                 signal = Signals.PedestrianSignal( sigDomain ) # signal domain is the same as convolution domain
-                
+
                 s = time.clock()
                 grids.convolveSignal( domain, kernel, signal, frameSet )
                 print '\t\tdone in %.2f seconds' % ( time.clock() - s )
@@ -475,7 +481,7 @@ class DensityAnalysisTask( DiscreteAnalysisTask ):
                     colorMap = COLOR_MAPS[ 'flame' ]
                 print '\tCreating images'
                 visualizeGFS( reader, colorMap, imageName, self.outImgType, 1.0, None )
-                print '\t\tdone in %.2f seconds' % ( time.clock() - s ) 
+                print '\t\tdone in %.2f seconds' % ( time.clock() - s )
 
     @staticmethod
     def typeStr():
@@ -485,13 +491,13 @@ class DensityAnalysisTask( DiscreteAnalysisTask ):
     def readConfig( self, file ):
         '''Reads the common TaskWidget parameters from the file'''
         DiscreteAnalysisTask.readConfig( self, file )
-        self.smoothParam = self._parseConfigLine( file, 'smoothParam', float ) 
+        self.smoothParam = self._parseConfigLine( file, 'smoothParam', float )
 
     def writeConfig( self, file ):
         DiscreteAnalysisTask.writeConfig( self, file )
         # raster properties
         file.write( 'smoothParam || %.5f\n' % ( self.smoothParam ) )
-    
+
 class SpeedAnalysisTask( DiscreteAnalysisTask ):
     def __init__( self ):
         DiscreteAnalysisTask.__init__( self )
@@ -526,12 +532,12 @@ class SpeedAnalysisTask( DiscreteAnalysisTask ):
                     colorMap = COLOR_MAPS[ 'flame' ]
                 print '\tCreating images'
                 visualizeGFS( reader, colorMap, imageName, self.outImgType, 1.0, None )
-                print '\t\tdone in %.2f seconds' % ( time.clock() - s ) 
+                print '\t\tdone in %.2f seconds' % ( time.clock() - s )
 
     @staticmethod
     def typeStr():
         '''Returns a string representation of this task'''
-        return "SPEED"   
+        return "SPEED"
 
 class FlowAnalysisTask( AnalysisTask ):
     def __init__( self ):
@@ -545,7 +551,7 @@ class FlowAnalysisTask( AnalysisTask ):
         @param      name        A string.  The name of the flow line.
         '''
         self._lines.append( ( name, line ) )
-        
+
     def execute( self ):
         '''Perform the work of the task'''
         if ( self.work ):
@@ -616,7 +622,7 @@ class RectRegionAnalysisTask( AnalysisTask ):
         @param      name        A string.  The name of the flow line.
         '''
         self._rects.append( ( name, rect ) )
-        
+
     def readConfig( self, file ):
         '''Reads the common TaskWidget parameters from the file'''
         AnalysisTask.readConfig( self, file )
@@ -650,7 +656,7 @@ class RectRegionAnalysisTask( AnalysisTask ):
     @property
     def rects( self ):
         return [ x[1] for x in self._rects ]
-    
+
 
 class PopulationAnalysisTask( RectRegionAnalysisTask ):
     def __init__( self ):
@@ -715,17 +721,14 @@ class FundDiagAnalysisTask( RectRegionAnalysisTask ):
     def typeStr():
         '''Returns a string representation of this task'''
         return "FUND DIAG"
-                
+
 if __name__ == '__main__':
-    task = DensityAnalysisTask()
-    task.setSCBFile( 'M:/anisotropic/experiment/stadium/mo11_smoothShift.scb' )
-    task.setDomain( -10.00000, -3.80000, 12.4, 8.4 )
-    task.setTimeStep( 0.1 )
-    task.setWorkFolder( 'M:/anisotropic/experiment/stadium/data' )
-    task.setTaskName( 'lores' )
-    task.setWork( AnalysisTask.COMPUTE )
-    task.setCellSize( 0.25 )
-    task.setColorMap( 'black_body' )
-    task.setOutImg( 'jpg' )
-    task.setSmoothParam( 1.5 )
+    task = FlowAnalysisTask()
+    # task.setSCBFile( 'C:/Users/Ed/Desktop/FinalYearProject/Menge-master/myAttempts/prototypeOutput.scb' )
+    # task.setTimeStep( 0.1 )
+    # task.setWorkFolder( 'C:/Users/Ed/Desktop/FinalYearProject/Menge-master/myAttempts' )
+    # task.setTaskName( 'lores' )
+    # task.setWork( AnalysisTask.COMPUTE )
+    file  = open("C:/Users/Ed/Desktop/FinalYearProject/Menge-master/myAttempts/prototype/flowConfig.cfg", 'r')
+    task.readConfig( file )
     task.execute()

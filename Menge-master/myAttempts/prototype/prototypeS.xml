@@ -58,6 +58,12 @@
 				<Vertex p_x="10.5" p_y="10.5" />
 				<Vertex p_x="2" p_y="10.5" />
 			</Obstacle>
+			<Obstacle closed="1">
+				<Vertex p_x="1" p_y="1" />
+				<Vertex p_x="-1" p_y="1" />
+				<Vertex p_x="-1" p_y="-1" />
+				<Vertex p_x="1" p_y="-1" />
+			</Obstacle>
 		</ObstacleSet>
 
 </Experiment>
