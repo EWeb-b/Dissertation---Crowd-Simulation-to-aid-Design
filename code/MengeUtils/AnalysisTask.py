@@ -721,6 +721,11 @@ class FundDiagAnalysisTask( RectRegionAnalysisTask ):
     def typeStr():
         '''Returns a string representation of this task'''
         return "FUND DIAG"
+def main():
+    task = FlowAnalysisTask()
+    file  = open("C:/Users/Ed/Desktop/FinalYearProject/code/myAttempts/prototype/flowConfig.cfg", 'r')
+    task.readConfig( file )
+    task.execute()
 
 if __name__ == '__main__':
     task = FlowAnalysisTask()
@@ -729,6 +734,6 @@ if __name__ == '__main__':
     # task.setWorkFolder( 'C:/Users/Ed/Desktop/FinalYearProject/Menge-master/myAttempts' )
     # task.setTaskName( 'lores' )
     # task.setWork( AnalysisTask.COMPUTE )
-    file  = open("C:/Users/Ed/Desktop/FinalYearProject/Menge-master/myAttempts/prototype/flowConfig.cfg", 'r')
+    file  = open("C:/Users/Ed/Desktop/FinalYearProject/code/myAttempts/prototype/flowConfig.cfg", 'r')
     task.readConfig( file )
     task.execute()

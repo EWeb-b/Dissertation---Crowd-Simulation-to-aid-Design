@@ -38,7 +38,7 @@ import pylab as plt
 from GFSVis import visualizeGFS
 from stats import StatRecord
 
-        
+
 ##          HELPER FUNCTION FOR REGION TESTS
 def findCurrentRegion( frame, polygons, excludeStates ):
     '''Given a frame, determines which region each agent is in.
@@ -86,7 +86,7 @@ def findRegionSpeed( f1, f2, timeStep, polygons, excludeStates, regions=None ):
         p2 = f2.agents[ a ].pos
         disp = (p2 - p1).magnitude()
         speed = disp / timeStep
-        
+
         # increment counters and accumulators
         speeds[ regions[a] ] += speed
         counts[ regions[a] ] += 1
@@ -94,7 +94,7 @@ def findRegionSpeed( f1, f2, timeStep, polygons, excludeStates, regions=None ):
     mask = counts != 0
     speeds[ mask ] /= counts[ mask ]
     return speeds, regions
-    
+
 
 def drawPolygonPG( surf, polygon, worldToImg, color, width ):
     '''Given a surface, a polygon, a color and a function mapping polygon coordinates to image coordinates,
@@ -113,8 +113,8 @@ def drawPolygons( surf, polygons, worldToImg, colors ):
     # draw the outlines
     for p in polygons:
         drawPolygonPG( surf, p, worldToImg, (0,0,0), 5 )
-        
-        
+
+
 def regionSpeedImages( dataFile, imagePath, polygons, colorMap, minCorner, size, resolution ):
     data = np.loadtxt( dataFile )
     data = data.mean( axis=0 )
@@ -142,7 +142,7 @@ def regionSpeedImages( dataFile, imagePath, polygons, colorMap, minCorner, size,
     surf = pygame.transform.flip( surf, False, True )
 ##    surf.blit( m, m.get_rect( ) )
     pygame.image.save( surf, '%s.png' % ( imagePath ) )
-    
+
 def firstDeriv( data, timeStep, k=1 ):
     '''Computes a 2nd order approximation of the first derivative using
     center-differences and the appropriate, 2nd-order, one-sided stencil at the ends.
@@ -158,7 +158,7 @@ def firstDeriv( data, timeStep, k=1 ):
     #end
 ##    deriv[ -k: ] = ( -data[-k:] + 4 * data[-2*k:-k] -3 * data[-3*k:-2*k] ) * denom
     return deriv
-    
+
 def gaussKernel1D( dx, sigma ):
     '''Create a 1D gaussian kernel with given sigma, sampled every dx values'''
     width = 6 * sigma
@@ -183,13 +183,13 @@ def plotFlow( outFileName, timeStep, titlePrefix='', legendStr=None, newFig=Fals
     else:
         plt.clf()
         fig = plt.gcf()
-    
+
     dataFile = outFileName + ".flow"
     dFile = open( dataFile, 'r' )
     nameLine = dFile.readline()[2:]
     if ( legendStr is None ):
         legendStr = nameLine.split('~')
-    
+
     data = np.loadtxt( dFile )
     data[:,0] *= timeStep
     smoothFlows = np.empty_like( data[:, 1:] )
@@ -213,7 +213,7 @@ def plotFlow( outFileName, timeStep, titlePrefix='', legendStr=None, newFig=Fals
         plt.xlim( xlimits )
     if ( ylimits != None ):
         plt.ylim( ylimits )
-    
+
     plt.savefig( outFileName + ".flow.png" )
     plt.savefig( outFileName + ".flow.eps" )
 
@@ -228,13 +228,13 @@ def plotPopulation( outFileName, timeStep, titlePrefix='', legendStr=None, newFi
     else:
         plt.clf()
         fig = plt.gcf()
-    
+
     dataFile = outFileName + ".pop"
     dFile = open( dataFile, 'r' )
     nameLine = dFile.readline()[2:]
     if ( legendStr is None ):
         legendStr = nameLine.split('~')
-    
+
     data = np.loadtxt( dFile )
     data[:,0] *= timeStep
     smoothFlows = np.empty_like( data[:, 1:] )
@@ -255,7 +255,7 @@ def plotPopulation( outFileName, timeStep, titlePrefix='', legendStr=None, newFi
         plt.xlim( xlimits )
     if ( ylimits != None ):
         plt.ylim( ylimits )
-    
+
     plt.savefig( outFileName + ".pop.png" )
     plt.savefig( outFileName + ".pop.eps" )
 
@@ -299,7 +299,7 @@ def computeFlow( frameSet, segments, outFileName, names=None ):
     A = -dY
     B = dX
     C = dY * S0X - dX * S0Y
-        
+
     outFile = open( outFileName + '.flow', 'w' )
 
     # write names
@@ -309,7 +309,7 @@ def computeFlow( frameSet, segments, outFileName, names=None ):
     crossed = np.zeros( segCount, dtype=np.int )
     # An NxM array indicating which segment each agent has already crossed
     alreadyCrossed = np.zeros( ( agtCount, segCount ), dtype=np.bool )
-    
+
     outFile.write('{0:10d}'.format( 0 ) )
     for val in crossed:
         outFile.write('{0:10d}'.format( val ) )
@@ -319,7 +319,7 @@ def computeFlow( frameSet, segments, outFileName, names=None ):
     frame, idx = frameSet.next()
     ids = frameSet.getFrameIds()   # mapping from frame IDs to global IDs
     frameIDs = map( lambda x: ids[ x ], xrange( frame.shape[0] ) )
-    
+
     # note: I'm doing this strange syntax so that they are Nx1 arrays (instead of just N arrays)
     #   this makes the broadcasting work better.
     pX = frame[:, :1 ]
@@ -330,7 +330,7 @@ def computeFlow( frameSet, segments, outFileName, names=None ):
 
     # SDIST: an N x M array.  The cell[i, j] reports if agent i is on the right side of
     #   segment j to cross it (according to indicated flow direction)
-    PREV_SDIST = ( A * pX + B * pY + C ) < 0 
+    PREV_SDIST = ( A * pX + B * pY + C ) < 0
     T = (pX - S0X) * dX + (pY - S0Y) * dY
     # BETWEEN: an N x M array.  The cell[i, j] reports if the agent i lies between the endpoints
     #   of segment j.
@@ -338,11 +338,11 @@ def computeFlow( frameSet, segments, outFileName, names=None ):
     # COULD_CROSS: an N x M array.  The cell[i, j] reports if the agent i is in a position to
     #   cross segment j.  (i.e., it lies between the endpoints and is on the negative side.)
     COULD_CROSS = np.zeros( ( agtCount, segCount ), dtype=np.bool )
-    
+
     # Only process the agents that are in the frame
     COULD_CROSS[ frameIDs, : ] = PREV_SDIST & BETWEEN
 ##    COULD_CROSS = PREV_SDIST & BETWEEN
-    
+
     while ( True ):
         try:
             frame, idx = frameSet.next()
@@ -362,7 +362,7 @@ def computeFlow( frameSet, segments, outFileName, names=None ):
 ##            print "\tAgents in frame: ", frameIDs
 ##            print "\tx:", pX.T
 ##            print "\ty:", pY.T
-        SDIST = ( A * pX + B * pY + C ) < 0 
+        SDIST = ( A * pX + B * pY + C ) < 0
         T = (pX - S0X) * dX + (pY - S0Y) * dY
         BETWEEN = ( T >= 0 ) & ( T <= L )
 ##        if ( idx > 30 and idx < 40 ):
@@ -386,7 +386,7 @@ def computeFlow( frameSet, segments, outFileName, names=None ):
 
     crossings = alreadyCrossed.sum( axis=1 )
     print "The following agents never crossed:", np.where( crossings == 0 )
-    
+
 def computePopulation( frameSet, rectDomains, outFileName, names=None ):
     '''Computes the time-dependent population for a set of rectangular domains.
     Output is an NxM array where there are N time steps and M rectangular regions.
@@ -412,13 +412,13 @@ def computePopulation( frameSet, rectDomains, outFileName, names=None ):
     Y_COL = 1
     if ( frameSet.is3D ):
         Y_COL = 2
-    
-    # pre-compute max corner to facilitate the test    
+
+    # pre-compute max corner to facilitate the test
     for i, rect in enumerate( rectDomains ):
         rect.maxCorner = ( rect.minCorner[0] + rect.size[0], rect.minCorner[1] + rect.size[1] )
 
     for i, rect in enumerate( rectDomains ):
-    
+
      while ( True ):
         try:
             frame, idx = frameSet.next()
@@ -428,13 +428,13 @@ def computePopulation( frameSet, rectDomains, outFileName, names=None ):
             ids = frameSet.getFrameIds()   # mapping from frame IDs to global IDs
             frameIDs = map( lambda x: ids[ x ], xrange( frame.shape[0] ) )
         # compute crossability for the current frame
-        
+
         pX = frame[:, :X_COL_LIMIT ]
         pY = frame[:, Y_COL:Y_COL+1 ]
 
         # the number of agents in each rect
         population = np.zeros( rectCount, dtype=np.int )
-        
+
         for i, rect in enumerate( rectDomains ):
             inside = ( pX >= rect.minCorner[0] ) & ( pX <= rect.maxCorner[0] ) & ( pY >= rect.minCorner[1] ) & ( pY <= rect.maxCorner[1] )
             population[ i ] = np.sum( inside )
@@ -445,7 +445,7 @@ def computePopulation( frameSet, rectDomains, outFileName, names=None ):
         outFile.write('\n')
 
     outFile.close()
-    
+
 
 def framesInRegion( region, data ):
     '''For each agent in data, computes the largest interval of time during which
@@ -469,7 +469,7 @@ def framesInRegion( region, data ):
 
     enterPt = np.empty( ( data.agentCount(), 2 ), dtype=np.float32 )
     distance = np.empty( data.agentCount(), dtype=np.float32 )
-    
+
     while ( True ):
         try:
             frame, idx = data.next()
@@ -497,7 +497,7 @@ def framesInRegion( region, data ):
                         distSq = np.dot( delta, delta )
                         distance[ simID ] = distSq
     distance = np.sqrt( distance )
-    
+
     return agtTime, distance
 
 def calcSpeeds( intervals, distances, timeStep ):
@@ -521,7 +521,7 @@ def calcSpeeds( intervals, distances, timeStep ):
     valid = elapsedTime > 0
     speed = np.empty_like( elapsedTime )
     speed[ valid ] = distances[ valid ] / elapsedTime[ valid ]
-    
+
     return speed, valid
 
 def calcIntervalDensityRegion( intervals, density ):
@@ -555,7 +555,7 @@ def defaultRegionNames( regionCount, forFileName=True ):
         return [ 'Region_%d' % i for i in xrange( len( rectDomains ) ) ]
     else:
         [ 'Region %d' % i for i in xrange( len( rectDomains ) ) ]
-                                
+
 
 def computeFundDiag( frameSet, rectDomains, outFileName, names=None ):
     '''Computes the fundamental diagram in one or more regions for the given agent data and
@@ -580,10 +580,10 @@ def computeFundDiag( frameSet, rectDomains, outFileName, names=None ):
     density = np.loadtxt( dFile )[:,1:] / areas
 
     if ( names is None ):
-        names = defaultRegionNames( len( rectDomains ) ) 
+        names = defaultRegionNames( len( rectDomains ) )
     else:
         assert( len( names ) == len( rectDomains ) )
-    
+
     # For each region
     for i, rect in enumerate( rectDomains ):
         # Compute intervals of agents crossing the regions
@@ -592,7 +592,7 @@ def computeFundDiag( frameSet, rectDomains, outFileName, names=None ):
         speeds, valid = calcSpeeds( intervals, distances, frameSet.simStepSize )
         densities = calcIntervalDensityRegion( intervals, density[ :, i ] )
         data = np.column_stack( ( densities[valid], speeds[valid] ) )
-        fdFileName = outFileName + '_%s.npy' % names[ i ] 
+        fdFileName = outFileName + '_%s.npy' % names[ i ]
         np.save( fdFileName, data )
 
 def plotFundDiag( outFileName, rectDomains, names=None ):
@@ -620,7 +620,7 @@ def plotFundDiag( outFileName, rectDomains, names=None ):
         fdData = np.load( fdFileName )
         regions.append( fdData )
         legendStr.append( displayNames[ i ] )
-        
+
         plt.title( 'Fundamental Diagram - %s' % displayNames[ i ] )
         plt.plot( fdData[:,0], fdData[:,1], 'ob' )
         plt.xlabel( 'Density (people/m$^2$)' )
@@ -639,7 +639,7 @@ def plotFundDiag( outFileName, rectDomains, names=None ):
         plt.savefig( figName + '_flow_.eps' )
         plt.savefig( figName + '_flow_.png' )
         plt.clf()
-        
+
     plt.title( 'Fundamental Diagram - All Regions' )
     plt.xlabel( 'Density (people/m$^2$)' )
     plt.ylabel( 'Speed (m/s)' )
@@ -664,7 +664,7 @@ def plotFundDiag( outFileName, rectDomains, names=None ):
         plt.savefig( outFileName + '_flow_.png' )
 
 
-    
+
 def computeFlowLines( center, lines, frameSet ):
     """Computes the flow of agents past the various lines"""
     # THIS VERSION IS HEAVILY TAWAF-CENTRIC - the simple computeFlow is far more generic
@@ -687,7 +687,7 @@ def computeFlowLines( center, lines, frameSet ):
         except StopIteration:
             break
     return flowRegion
-    
+
 def main():
     """Test the functionality"""
     from math import pi, exp
@@ -731,10 +731,10 @@ def main():
         ColorMap.BAR_HEIGHT = 300
         ColorMap.BAR_WIDTH = 30
         ColorMap.FONT_SIZE = 20
-    
+
     timeStep = 1.0
     outPath = '.'
-    
+
     if ( True ):
         # This size doesn't work for 25k
 ##        size = Vector2( 175.0, 120.0 )
@@ -764,23 +764,23 @@ def main():
     colorMap = FlameMap()
 
     # output the parameters used to create the data
-    # todo:    
+    # todo:
 
     R = 2.0
     R = 1.5
-    
+
     def distFunc( dispX, dispY, radiusSqd ):
         """Constant distance function"""
         # This is the local density function provided by Helbing
         # using Gaussian, delta(in the equation) = radiusSqd
-        return np.exp( -(dispX * dispX + dispY * dispY) / (2.0 * radiusSqd ) ) / ( 2.0 * np.pi * radiusSqd )       
+        return np.exp( -(dispX * dispX + dispY * dispY) / (2.0 * radiusSqd ) ) / ( 2.0 * np.pi * radiusSqd )
 
     dfunc = lambda x, y: distFunc( x, y, R * R )
 
     if ( options.density ):
         if ( not os.path.exists( os.path.join( outPath, 'dense' ) ) ):
             os.makedirs( os.path.join( outPath, 'dense' ) )
-    
+
         print "\tComputing density with R = %f" % R
         s = time.clock()
         kernel = Kernels.GaussianKernel( R, CELL_SIZE, False )
@@ -797,7 +797,7 @@ def main():
     if ( options.speed ):
         if ( not os.path.exists( os.path.join( outPath, 'speed' ) ) ):
             os.makedirs( os.path.join( outPath, 'speed' ) )
-    
+
         print "\tComputing speeds",
         s = time.clock()
         stats = grids.computeSpeeds( minPt, size, res, R, frameSet, timeStep, EXCLUDE_STATES, GridFileSequence.BLIT_SPEED )
@@ -815,18 +815,18 @@ def main():
     if ( options.omega ):
         if ( not os.path.exists( os.path.join( outPath, 'omega' ) ) ):
             os.makedirs( os.path.join( outPath, 'omega' ) )
-    
+
         print "\tComputing omega",
         s = time.clock()
         stats = grids.computeAngularSpeeds( minPt, size, res, R, frameSet, timeStep, EXCLUDE_STATES, GridFileSequence.BLIT_SPEED, FRAME_WINDOW )
         stats.write( os.path.join( outPath, 'omega', 'stat.txt' ) )
-        stats.savePlot( os.path.join( outPath, 'omega', 'stat.png'), 'Average radial velocity per step' ) 
+        stats.savePlot( os.path.join( outPath, 'omega', 'stat.png'), 'Average radial velocity per step' )
         print "Took", (time.clock() - s), "seconds"
         print "\tComputing omega images",
         s = time.clock()
         imageName = os.path.join( outPath, 'omega', 'omega' )
         colorMap = RedBlueMap()
-        
+
         reader = GridFileSequenceReader( grids.outFileName + ".omega"  )
         visualizeGFS( reader, colorMap, imageName, 'png', 1.0, grids.obstacles )
 
@@ -840,7 +840,7 @@ def main():
         s = time.clock()
         stats = grids.computeProgress( minPt, size, res, R, frameSet, timeStep, EXCLUDE_STATES, FRAME_WINDOW )
         stats.write( os.path.join( outPath, 'progress', 'stat.txt' ) )
-        stats.savePlot( os.path.join( outPath, 'progress', 'stat.png'), 'Average progress around Kaabah' ) 
+        stats.savePlot( os.path.join( outPath, 'progress', 'stat.png'), 'Average progress around Kaabah' )
         print "Took", (time.clock() - s), "seconds"
         print "\tComputing progress images",
         s = time.clock()
@@ -853,7 +853,7 @@ def main():
     if ( False ):
         if ( not os.path.exists( os.path.join( outPath, 'advec' ) ) ):
             os.makedirs( os.path.join( outPath, 'advec' ) )
-    
+
         lines = [ Segment( Vector2(0.81592, 5.12050), Vector2( 0.96233, -5.27461) ) ]
         print "\tComputing advection",
         s = time.clock()
@@ -897,7 +897,7 @@ def main():
                  (3, 2, 7, 4)
                  )
         polygons = []
-        
+
         for ids in vIDs:
             p = Polygon()
             p.closed = True
@@ -910,12 +910,12 @@ def main():
         imagePath = os.path.join( outPath, 'regionSpeed', 'region' )
         colorMap = TwoToneHSVMap( (0, 0.63, 0.96), (100, 0.53, 0.75 ) )
         regionSpeedImages( grids.outFileName + ".region", imagePath, polygons, colorMap, minPt, size, res )
-        
+
     if ( False ):
         # flow lines
         if ( not os.path.exists( os.path.join( outPath, 'flow' ) ) ):
             os.makedirs( os.path.join( outPath, 'flow' ) )
-                 
+
         lines = ( Segment( Vector2( 4.56230, -7.71608 ), Vector2( 81.49586, -4.55443  ) ),
                   Segment( Vector2( 5.08924, 5.72094 ), Vector2( 82.28628, 8.61913  ) ),
                   Segment( Vector2( 3.50842, 8.09218 ), Vector2( 2.71800, 51.30145  ) ),
@@ -939,4 +939,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
