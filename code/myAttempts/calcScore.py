@@ -10,9 +10,8 @@ timeLimit = 300
 dataFile = r'C:\Users\Ed\Desktop\FinalYearProject\code\myAttempts\flow\firstTest\firstTest.flow'
 data = []
 agentTimes = []
-numAgents = 4
 
-def calcScore(fileName, numAgents):
+def calcScore(fileName):
     sucAgents = 0
     sTime = 0
     with open(fileName, 'r') as file:
@@ -20,6 +19,8 @@ def calcScore(fileName, numAgents):
 
     for line in lines:
         data.append(line.split())
+
+    numAgents = int(data[-1][1])
 
     for x, thisData in enumerate(data[1:]):
         if int(thisData[1]) > sucAgents:
@@ -39,5 +40,6 @@ def calcScore(fileName, numAgents):
     print 'sucAgents: ' + str(Pa)
     score = Pa/tAve
     print 'score: %.4f' % score
+    return score
 
-calcScore(dataFile, numAgents)
+#calcScore(dataFile)

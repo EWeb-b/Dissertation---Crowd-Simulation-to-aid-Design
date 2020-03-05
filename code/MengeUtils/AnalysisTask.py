@@ -725,8 +725,10 @@ def main():
     task = FlowAnalysisTask()
     file  = open("C:/Users/Ed/Desktop/FinalYearProject/code/myAttempts/prototype/flowConfig.cfg", 'r')
     task.readConfig( file )
+    workPath = task.getWorkPath( 'flow' )
+    workPathFull = workPath + '/' + task.workName + '.flow'
     task.execute()
-
+    return workPathFull
 if __name__ == '__main__':
     task = FlowAnalysisTask()
     # task.setSCBFile( 'C:/Users/Ed/Desktop/FinalYearProject/Menge-master/myAttempts/prototypeOutput.scb' )
