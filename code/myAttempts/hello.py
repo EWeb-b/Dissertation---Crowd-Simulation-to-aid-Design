@@ -13,16 +13,16 @@ subprocess.check_call([r"C:\Users\Ed\Desktop\FinalYearProject\code\Menge-master\
         "-p", r"C:\Users\Ed\Desktop\FinalYearProject\code\myAttempts\prototype.xml",
                 "-o", r"C:\Users\Ed\Desktop\FinalYearProject\code\myAttempts\prototypeOutput.scb"])
 
-# Change the location of the box obstacle
-oM.changeBoxCoords(oM.getBoxCoords())
-
 # Analyse the flow of the simulation and return the path to the flow file.
 wPath = AnalysisTask.main()
 print 'wpath: ' + wPath
 
 # Calculate the score of the scenario from the flow file.
 score = calcScore.calcScore(wPath)
-print 'Score for ' + wPath + ': %.4f' % score 
+print 'Score for ' + wPath + ': %.4f' % score
+
+# Change the location of the box obstacle
+oM.changeBoxCoords(oM.getBoxCoords())
 
 # Change the analysis output location
 # NOTE: could be using something like task.setTaskName( 'lores' ) in AnalysisTask

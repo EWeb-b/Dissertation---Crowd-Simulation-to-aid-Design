@@ -275,6 +275,8 @@ void GLViewer::run() {
   printAverages();
 
   _scene->finish();
+  if (_window) SDL_DestroyWindow(_window);
+  SDL_Quit();
 }
 
 ///////////////////////////////////////////////////////////////////////////
