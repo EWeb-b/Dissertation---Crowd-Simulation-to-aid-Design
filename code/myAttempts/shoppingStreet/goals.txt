@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<Population >
+    <GoalSet id="0">
+        <Goal capacity="1000000" id="0" radius="1.00" type="circle" weight="1.00" x="0.00" y="17.50"/>
+    </GoalSet>
+    <GoalSet id="1">
+        <Goal capacity="1000000" id="0" max_x="6.09" max_y="24.85" min_x="1.97" min_y="24.06" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="1" max_x="12.44" max_y="24.81" min_x="9.11" min_y="24.02" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="2" max_x="17.47" max_y="24.87" min_x="14.97" min_y="24.10" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="3" max_x="27.52" max_y="24.82" min_x="23.98" min_y="24.27" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="4" max_x="39.48" max_y="24.82" min_x="37.00" min_y="24.22" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="5" max_x="55.02" max_y="24.82" min_x="45.04" min_y="24.25" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="6" max_x="65.86" max_y="24.87" min_x="62.32" min_y="24.22" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="7" max_x="73.62" max_y="24.85" min_x="71.19" min_y="24.22" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="8" max_x="83.60" max_y="24.82" min_x="79.27" min_y="24.27" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="9" max_x="98.22" max_y="24.82" min_x="90.97" min_y="24.29" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="10" max_x="99.06" max_y="10.92" min_x="94.64" min_y="10.12" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="11" max_x="85.00" max_y="10.74" min_x="80.36" min_y="10.12" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="12" max_x="72.94" max_y="10.57" min_x="70.15" min_y="10.02" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="13" max_x="62.56" max_y="10.65" min_x="56.35" min_y="10.11" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="14" max_x="47.89" max_y="10.65" min_x="43.40" min_y="10.16" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="15" max_x="34.27" max_y="10.56" min_x="29.18" min_y="10.16" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="16" max_x="23.84" max_y="10.59" min_x="20.29" min_y="10.16" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="17" max_x="12.80" max_y="10.65" min_x="11.17" min_y="10.13" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="18" max_x="5.28" max_y="10.79" min_x="1.02" min_y="10.22" type="AABB" weight="1.00"/>
+    </GoalSet>
+
+</Population>

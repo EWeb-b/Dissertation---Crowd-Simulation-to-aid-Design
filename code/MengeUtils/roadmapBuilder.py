@@ -32,7 +32,7 @@ def handleKey( event, context, view, theGraph, obstacles, agents, field ):
         result = context.handleKeyboard( event, view )
         if ( result.isHandled() ):
             return result
-        
+
     mods = pygame.key.get_mods()
     hasShift = mods & pygame.KMOD_SHIFT
     hasCtrl = mods & pygame.KMOD_CTRL
@@ -100,7 +100,7 @@ def handleMouse( event, context, view, graph, obstacles, agents, field ):
     hasCtrl = mods & pygame.KMOD_CTRL
     hasAlt = mods & pygame.KMOD_ALT
     hasShift = mods & pygame.KMOD_SHIFT
-    
+
     if (event.type == pygame.MOUSEMOTION ):
         if ( dragging == RECT):
             pass
@@ -114,7 +114,7 @@ def handleMouse( event, context, view, graph, obstacles, agents, field ):
             view.zoom( dy )
             result.setNeedsRedraw( True )
         elif ( dragging == EDGE ):
-            pX, pY = event.pos 
+            pX, pY = event.pos
             selected = view.select( pX, pY, graph )
             selVert = graph.vertices[ selected ]
             if ( selected != -1 and selVert != graph.fromID  ):
@@ -267,7 +267,7 @@ def message( view, txt ):
     for m in msgs:
         view.printText( m, (x, y ) )
         y -= view.lh
-        
+
 def writeRoadmap():
     pass
 
@@ -341,13 +341,15 @@ def main():
         field.read( fieldName )
     elif ( options.createField ):
         print ("Instantiate vector field from geometry:", bb)
-        bbSize = bb.max - bb.min    
+        bbSize = bb.max - bb.min
         field = GLVectorField( ( bb.min.x, bb.min.y ), ( bbSize.y, bbSize.x ), 2.0 )
     else:
         field = None
-    
+
     graph = Graph()
     if ( roadmapName ):
+        print(roadmapName)
+        print(type(roadmapName))
         graph.initFromFile( roadmapName )
 
     # create viewer
@@ -430,7 +432,7 @@ def main():
                 if ( name ):
                     pygame.image.save( view.surface, name )
             redraw = False
-    writeRoadmap()    
+    writeRoadmap()
 
 if __name__ == '__main__':
     main()

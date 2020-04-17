@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Experiment version="2.0">
     <SpatialQuery type="kd-tree" test_visibility="false" />
-	
+
     <OpenSteer max_force="8" leak_through="0.1" reaction_time="0.5" />
     <Common time_step="0.1" />
     <GCF reaction_time="0.5" max_agent_dist="2" max_agent_force="3" agent_interp_width="0.1" agent_force_strength="0.35" />
@@ -36,75 +36,75 @@
 			<Property name="pref_speed" dist="c" value="0.75" />
 		</Common>
 	</AgentProfile>
-	
+
     <AgentGroup>
         <ProfileSelector type="const" name="group1" />
 		<StateSelector type="const" name="Walk" />
-		<Generator type="rect_grid" 
-					anchor_x="-7.3" anchor_y="-7.3" 
-					offset_x="-1.333" offset_y="-1.333" 
-					count_x="5" count_y="5" 
+		<Generator type="rect_grid"
+					anchor_x="-7.3" anchor_y="-7.3"
+					offset_x="-1.333" offset_y="-1.333"
+					count_x="5" count_y="5"
 					displace_dist="u" displace_min="0.0" displace_max="0.25"
 					/>
 	</AgentGroup>
-    
+
     <AgentGroup>
         <ProfileSelector type="const" name="group2" />
 		<StateSelector type="const" name="Walk" />
-		<Generator type="rect_grid" 
-					anchor_x="7.3" anchor_y="-7.3" 
-					offset_x="1.333" offset_y="-1.333" 
-					count_x="5" count_y="5" 
+		<Generator type="rect_grid"
+					anchor_x="7.3" anchor_y="-7.3"
+					offset_x="1.333" offset_y="-1.333"
+					count_x="5" count_y="5"
 					displace_dist="u" displace_min="0.0" displace_max="0.25"
 					/>
     </AgentGroup>
-    
+
     <AgentGroup>
         <ProfileSelector type="const" name="group3" />
 		<StateSelector type="const" name="Walk" />
-		<Generator type="rect_grid" 
-					anchor_x="-7.3" anchor_y="7.3" 
-					offset_x="-1.333" offset_y="1.333" 
-					count_x="5" count_y="5" 
+		<Generator type="rect_grid"
+					anchor_x="-7.3" anchor_y="7.3"
+					offset_x="-1.333" offset_y="1.333"
+					count_x="5" count_y="5"
 					displace_dist="u" displace_min="0.0" displace_max="0.25"
 					/>
     </AgentGroup>
-    
+
     <AgentGroup>
         <ProfileSelector type="const" name="group4" />
 		<StateSelector type="const" name="Walk" />
-		<Generator type="rect_grid" 
-					anchor_x="7.3" anchor_y="7.3" 
-					offset_x="1.333" offset_y="1.333" 
-					count_x="5" count_y="5" 
+		<Generator type="rect_grid"
+					anchor_x="7.3" anchor_y="7.3"
+					offset_x="1.333" offset_y="1.333"
+					count_x="5" count_y="5"
 					displace_dist="u" displace_min="0.0" displace_max="0.25"
 					/>
     </AgentGroup>
-	
-    <ObstacleSet type="explicit" class="1"> 
+
+    <ObstacleSet type="explicit" class="1">
           <Obstacle closed="1"  >
             <Vertex p_x = "1.333" p_y = "1.333"/>
             <Vertex p_x = "5.333" p_y = "1.333"/>
             <Vertex p_x = "5.333" p_y = "5.333"/>
-            <Vertex p_x = "1.333" p_y = "5.333"/> 
+            <Vertex p_x = "1.333" p_y = "5.333"/>
           </Obstacle>
           <Obstacle closed="1"  >
             <Vertex p_x = "-5.333" p_y = "1.333"/>
             <Vertex p_x = "-1.333" p_y = "1.333"/>
             <Vertex p_x = "-1.333" p_y = "5.333"/>
-            <Vertex p_x = "-5.333" p_y = "5.333"/> 
+            <Vertex p_x = "-5.333" p_y = "5.333"/>
           </Obstacle>
           <Obstacle closed="1"  >
             <Vertex p_x = "-5.333" p_y = "-5.333"/>
             <Vertex p_x = "-1.333" p_y = "-5.333"/>
             <Vertex p_x = "-1.333" p_y = "-1.333"/>
-            <Vertex p_x = "-5.333" p_y = "-1.333"/> 
+            <Vertex p_x = "-5.333" p_y = "-1.333"/>
           </Obstacle>
           <Obstacle closed="1"  >
             <Vertex p_x = "1.333" p_y = "-5.333"/>
             <Vertex p_x = "5.333" p_y = "-5.333"/>
             <Vertex p_x = "5.333" p_y = "-1.333"/>
-            <Vertex p_x = "1.333" p_y = "-1.333"/> 
+            <Vertex p_x = "1.333" p_y = "-1.333"/>
           </Obstacle>
     </ObstacleSet>
 

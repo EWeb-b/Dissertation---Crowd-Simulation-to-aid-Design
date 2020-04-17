@@ -19,6 +19,26 @@ def readSegments( fileName ):
     f.close()
     return segments
 
+def convert(filename):
+    segments = readSegments( filename )
+    # print('SEGMENTS:')
+    # for s in segments:
+    #     print s
+    # print('POLYS:')
+    polys = buildPolygons( segments, Vector3( 0, 1, 0 ) )
+    # for p in polys:
+    #     print p
+
+    # print '<?xml version="1.0"?>'
+    # print '<Experiment>'
+    s = ''
+    for p in polys:
+        print p.RVOString()
+        s += '\n' + p.RVOString()
+    # print '</Experiment>'
+    return s
+
+
 def main():
     segments = readSegments( sys.argv[1] )
     for s in segments:

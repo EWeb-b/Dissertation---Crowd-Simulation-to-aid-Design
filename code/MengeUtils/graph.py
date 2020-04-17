@@ -32,7 +32,7 @@ class Edge:
 
     def __str__( self ):
         return "%d to %d" % ( self.start.id, self.end.id )
-    
+
     def isValid( self ):
         return self.start != None and self.end != None
 
@@ -41,12 +41,12 @@ class Edge:
 
     def copy( self ):
         return Edge( self.start, self.end )
-    
+
 class Graph:
     """Simple graph class"""
     def __init__( self ):
         self.clear()
-        
+
     def clear( self ):
         self.vertices = []
         self.edges = []
@@ -54,11 +54,11 @@ class Graph:
         self.fromID = None
         self.toID = None
         self.testEdge = Edge()
-        
+
     def initFromFile( self, fileName ):
         global line_num
         line_num = 1
-        
+
         def readline():
             '''Reads a single line, returning its stripped contents;
             also increments line number'''
@@ -76,7 +76,7 @@ class Graph:
                 return int(s)
             except ValueError:
                 raise ValueError, "Error reading int from line {} - read '{}' for {}".format(line_num, s, msg)
-        
+
         print "Roadmap initfromFile", fileName
         f = open( fileName, 'r' )
         vertCount = read_int("vertex count")
@@ -101,7 +101,7 @@ class Graph:
             v1 = int( tokens[0] )
             v2 = int( tokens[1] )
             self.addEdgeByVert( v1, v2 )
-            
+
     def __str__( self ):
         s = "%d\n" % ( len (self.vertices ) )
         for i, v in enumerate( self.vertices ):
@@ -124,12 +124,12 @@ class Graph:
         s += '%d\n' % ( len( self.edges ) )
         for i, e in enumerate( self.edges ):
             s += '%d %d\n' % ( e.start.id, e.end.id )
-        return s        
+        return s
 
     def lastVertex( self ):
         """Returns the index of the last vertex"""
         return self.vertices[-1]
-    
+
     def addVertex( self, pos ):
         self.vertices.append( Vertex( pos ) )
 
@@ -143,7 +143,7 @@ class Graph:
         for i in range( startIndex, len( self.vertices ) ):
             self.vertices[i].id = i
 
-        # remove edges            
+        # remove edges
         for e in v.neighbors:
             n = e.start
             if ( n == vertex ):
@@ -152,19 +152,19 @@ class Graph:
             self.edges.pop( self.edges.index( e ) )
 
         v.neighbors = []
-        
+
     def addEdge( self, e ):
         edge = e.copy()
         edge.start.neighbors.append( edge )
         edge.end.neighbors.append( edge )
         self.edges.append( edge )
-    
+
     def deleteEdge( self, edge ):
         # delete the edge
         edge.start.removeEdge( edge )
         edge.end.removeEdge( edge )
         self.edges.pop( self.edges.index( edge ) )
-        
+
     def addEdgeByVert( self, v1, v2 ):
         self.addEdge( Edge( self.vertices[ v1 ], self.vertices[ v2] ) )
 
@@ -183,7 +183,7 @@ class Graph:
         if ( self.activeEdge != None ):
             glLineWidth( 3.0 )
             self.drawEdges( ( self.activeEdge, ), False, editable )
-        
+
     def drawEdges( self, edges, select=False, editable=False ):
         if ( edges or self.testEdge.isValid() ):
             glPushAttrib( GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT )
@@ -211,8 +211,8 @@ class Graph:
                 glVertex3f( p2[0], p2[1], 0 )
                 glEnd()
             glPopAttrib()
-            glLineWidth( 1.0 )            
-            
+            glLineWidth( 1.0 )
+
     def drawVertices( self, vertices, select=False, editable=False ):
         if ( vertices ):
             glPushAttrib( GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT )
@@ -221,7 +221,7 @@ class Graph:
                 glColor3f( 0.9, 0.9, 0.0 )
             else:
                 glColor3f( 0.45, 0.45, 0.0 )
-            
+
             for i, v in enumerate( vertices ):
                 if ( select ):
                     glLoadName( i )
@@ -229,4 +229,4 @@ class Graph:
                 p = v.pos
                 glVertex3f( p[0], p[1], 0 )
                 glEnd()
-            glPopAttrib()    
+            glPopAttrib()

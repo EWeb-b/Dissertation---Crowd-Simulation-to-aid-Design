@@ -133,7 +133,7 @@ class MENGE_API RectGridGenerator : public AgentGenerator {
  protected:
   /*!
    @brief    The anchor point of the lattice.
-   
+
    One agent will be positioned at this world coordainte.
    */
   Vector2 _anchor;
@@ -156,7 +156,7 @@ class MENGE_API RectGridGenerator : public AgentGenerator {
 
   /*!
    @brief    The cosine of the amount the lattice is rotated around its anchor point.
-   
+
    Positive rotation values are counter-clockwise rotation.
    */
   float _cosRot;
