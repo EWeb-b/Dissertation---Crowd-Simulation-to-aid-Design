@@ -27,9 +27,19 @@ import random
 # print(s)
 #print(p1.intersects(p2))
 
-listForm = []
-listForm.append((2.0,5.9))
-output = ''
-output += '<Obstacle closed = "1">'
-output += '\n<Vertex p_x="%f" p_y="%f" />' % (listForm[0][0], listForm[0][1])
-print (output)
+# listForm = []
+# listForm.append((2.0,5.9))
+# output = ''
+# output += '<Obstacle closed = "1">'
+# output += '\n<Vertex p_x="%f" p_y="%f" />' % (listForm[0][0], listForm[0][1])
+# print (output)
+
+hello = [0,1,2,3,4,5,6,7,8,9]
+displayCount = 3
+print (hello)
+x = 3
+for y, hi in enumerate(hello):
+    if y > displayCount - 1:
+        hello[y] = hello[y] + 10
+
+print(hello)

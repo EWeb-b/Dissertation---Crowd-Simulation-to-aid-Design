@@ -25,6 +25,33 @@ def buildBench():
     print (list(benchPoly.exterior.coords))
     return benchPoly
 
+def modifyBench(bench):
+    b = list(bench.exterior.coords)
+    if b[1][0] - b[0][0] == 1.0:
+        thinBenchPoly = Polygon([(b[0][0]+0.25,b[0][1]), (b[1][0]-0.25,b[1][1]), (b[2][0]-0.25,b[2][1]), (b[3][0]+0.25,b[3][1])])
+        return thinBenchPoly
+    elif b[1][0] - b[0][0] == 2.0:
+        thinBenchPoly = Polygon([(b[0][0],b[0][1]+0.25), (b[1][0],b[1][1]+0.25), (b[2][0],b[2][1]-0.25), (b[3][0],b[3][1]-0.25)])
+        return thinBenchPoly
+    else:
+        return bench
+
+
+# def buildBench():
+#     print('Building bench...')
+#     portrait = random.randint(0,1)
+#     if portrait is 1:
+#         bLX = random.randint(10, 90) - 0.25
+#         bLY = random.randint(14, 19) - 0.5
+#         benchPoly = Polygon([(bLX,bLY), (bLX+0.5,bLY), (bLX+0.5,bLY+2), (bLX,bLY+2)])
+#     else:
+#         bLX = random.randint(10, 90) - 0.5
+#         bLY = random.randint(14, 19) - 0.25
+#         benchPoly = Polygon([(bLX,bLY), (bLX+2,bLY), (bLX+2,bLY+0.5), (bLX,bLY+0.5)])
+#     print (list(benchPoly.exterior.coords))
+#     return benchPoly
+
+
 def isValidPlacement(current):
     print ('isValidPlacement start')
     if not obs:
@@ -87,6 +114,10 @@ def constructObs(displayCount, benchCount):
             else:
                 print ('no probs found\n')
                 repeat = False
+
+    for x, ob in enumerate(obs):
+        if x > displayCount - 1:
+            obs[x] = modifyBench(obs[x])
     return obs
     #return writeOut(displayCount + benchCount)
     #return convertToXML()

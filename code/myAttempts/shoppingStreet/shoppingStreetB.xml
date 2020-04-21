@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
 
 <BFSM>
-
+		<!-- GOALS -->
 		<GoalSet id="0">
 				<Goal capacity="1000000" id="0" radius="1.00" type="circle" weight="1.00" x="0.00" y="17.50"/>
 				<Goal capacity="1000000" id="1" radius="1.00" type="circle" weight="1.00" x="30" y="5"/>
 		</GoalSet>
-		<!-- Windows -->
 		<GoalSet id="1">
+				<Goal capacity="1000000" id="0" max_x="1.00" max_y="24.50" min_x="0.00" min_y="10.50" type="AABB" weight="1.00"/>
+				<Goal capacity="1000000" id="1" max_x="100.00" max_y="24.50" min_x="99.00" min_y="10.50" type="AABB" weight="1.00"/>
+		</GoalSet>
+		<!-- Windows -->
+		<GoalSet id="2">
 				<Goal capacity="1000000" id="0" max_x="6.09" max_y="24.85" min_x="1.97" min_y="24.06" type="AABB" weight="1.00"/>
 				<Goal capacity="1000000" id="1" max_x="12.44" max_y="24.81" min_x="9.11" min_y="24.02" type="AABB" weight="1.00"/>
 				<Goal capacity="1000000" id="2" max_x="17.47" max_y="24.87" min_x="14.97" min_y="24.10" type="AABB" weight="1.00"/>
@@ -28,15 +32,228 @@
 				<Goal capacity="1000000" id="17" max_x="12.80" max_y="10.65" min_x="11.17" min_y="10.13" type="AABB" weight="1.00"/>
 				<Goal capacity="1000000" id="18" max_x="5.28" max_y="10.79" min_x="1.02" min_y="10.22" type="AABB" weight="1.00"/>
 		</GoalSet>
-
-		<State name="Escape" final="0" >
-			<GoalSelector type="explicit" goal_set="0" goal="1" />
-			<VelComponent type="road_map" file_name="graph.txt" />
-			<!-- <VelComponent type="vel_field" file_name="field.txt" /> -->
+		<!-- Shops-->
+		<GoalSet id="3">
+        <Goal capacity="1000000" id="0" max_x="5.37" max_y="34.75" min_x="0.33" min_y="32.73" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="1" max_x="17.67" max_y="29.87" min_x="14.59" min_y="27.92" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="2" max_x="29.39" max_y="27.99" min_x="25.24" min_y="25.97" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="3" max_x="38.87" max_y="30.02" min_x="36.78" min_y="28.95" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="4" max_x="52.72" max_y="33.10" min_x="47.32" min_y="31.52" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="5" max_x="64.37" max_y="30.53" min_x="61.47" min_y="29.17" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="6" max_x="53.83" max_y="24.43" min_x="53.83" min_y="24.43" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="7" max_x="73.41" max_y="29.87" min_x="71.39" min_y="27.81" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="8" max_x="83.77" max_y="29.46" min_x="80.06" min_y="27.63" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="9" max_x="99.71" max_y="32.29" min_x="94.13" min_y="30.02" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="10" max_x="1.63" max_y="10.47" min_x="1.63" min_y="10.47" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="11" max_x="4.54" max_y="2.78" min_x="0.43" min_y="0.76" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="12" max_x="13.21" max_y="4.77" min_x="11.56" min_y="2.35" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="13" max_x="23.47" max_y="5.68" min_x="21.34" min_y="4.17" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="14" max_x="33.65" max_y="7.30" min_x="30.85" min_y="6.02" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="15" max_x="48.02" max_y="4.64" min_x="43.60" min_y="3.32" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="16" max_x="61.47" max_y="7.70" min_x="57.12" min_y="5.70" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="17" max_x="73.18" max_y="6.09" min_x="70.41" min_y="4.71" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="18" max_x="85.05" max_y="5.35" min_x="80.93" min_y="3.96" type="AABB" weight="1.00"/>
+        <Goal capacity="1000000" id="19" max_x="99.21" max_y="4.34" min_x="95.98" min_y="2.51" type="AABB" weight="1.00"/>
+    </GoalSet>
+		<!-- Start of display and bench goals -->
+		<!-- Start delete -->
+		<GoalSet id="4">
+			<Goal capacity="5" id="0" max_x="20.000000" min_x="16.000000" max_y="15.500000" min_y="15.000000" type="AABB" weight="1.00"/>
+			<Goal capacity="5" id="1" max_x="21.000000" min_x="20.500000" max_y="20.000000" min_y="16.000000" type="AABB" weight="1.00"/>
+			<Goal capacity="5" id="2" max_x="20.000000" min_x="16.000000" max_y="21.000000" min_y="20.500000" type="AABB" weight="1.00"/>
+			<Goal capacity="5" id="3" max_x="15.500000" min_x="15.000000" max_y="20.000000" min_y="16.000000" type="AABB" weight="1.00"/>
+			<Goal capacity="5" id="4" max_x="56.000000" min_x="52.000000" max_y="15.500000" min_y="15.000000" type="AABB" weight="1.00"/>
+			<Goal capacity="5" id="5" max_x="57.000000" min_x="56.500000" max_y="20.000000" min_y="16.000000" type="AABB" weight="1.00"/>
+			<Goal capacity="5" id="6" max_x="56.000000" min_x="52.000000" max_y="21.000000" min_y="20.500000" type="AABB" weight="1.00"/>
+			<Goal capacity="5" id="7" max_x="51.500000" min_x="51.000000" max_y="20.000000" min_y="16.000000" type="AABB" weight="1.00"/>
+			<Goal capacity="5" id="8" max_x="78.000000" min_x="74.000000" max_y="14.500000" min_y="14.000000" type="AABB" weight="1.00"/>
+			<Goal capacity="5" id="9" max_x="79.000000" min_x="78.500000" max_y="19.000000" min_y="15.000000" type="AABB" weight="1.00"/>
+			<Goal capacity="5" id="10" max_x="78.000000" min_x="74.000000" max_y="20.000000" min_y="19.500000" type="AABB" weight="1.00"/>
+			<Goal capacity="5" id="11" max_x="73.500000" min_x="73.000000" max_y="19.000000" min_y="15.000000" type="AABB" weight="1.00"/>
+		</GoalSet>
+		<GoalSet id="5">
+			<Goal capacity="1" id="0" type="point" weight="1.00" x="63.500000" y="16.150000"/>
+			<Goal capacity="1" id="1" type="point" weight="1.00" x="63.500000" y="16.850000"/>
+			<Goal capacity="1" id="2" type="point" weight="1.00" x="29.150000" y="14.500000"/>
+			<Goal capacity="1" id="3" type="point" weight="1.00" x="29.850000" y="14.500000"/>
+			<Goal capacity="1" id="4" type="point" weight="1.00" x="45.150000" y="13.500000"/>
+			<Goal capacity="1" id="5" type="point" weight="1.00" x="45.850000" y="13.500000"/>
+			<Goal capacity="1" id="6" type="point" weight="1.00" x="45.150000" y="18.500000"/>
+			<Goal capacity="1" id="7" type="point" weight="1.00" x="45.850000" y="18.500000"/>
+			<Goal capacity="1" id="8" type="point" weight="1.00" x="16.150000" y="13.500000"/>
+			<Goal capacity="1" id="9" type="point" weight="1.00" x="16.850000" y="13.500000"/>
+			<Goal capacity="1" id="10" type="point" weight="1.00" x="88.150000" y="17.500000"/>
+			<Goal capacity="1" id="11" type="point" weight="1.00" x="88.850000" y="17.500000"/>
+			<Goal capacity="1" id="12" type="point" weight="1.00" x="88.500000" y="14.150000"/>
+			<Goal capacity="1" id="13" type="point" weight="1.00" x="88.500000" y="14.850000"/>
+			<Goal capacity="1" id="14" type="point" weight="1.00" x="48.150000" y="15.500000"/>
+			<Goal capacity="1" id="15" type="point" weight="1.00" x="48.850000" y="15.500000"/>
+			<Goal capacity="1" id="16" type="point" weight="1.00" x="66.150000" y="17.500000"/>
+			<Goal capacity="1" id="17" type="point" weight="1.00" x="66.850000" y="17.500000"/>
+			<Goal capacity="1" id="18" type="point" weight="1.00" x="42.150000" y="15.500000"/>
+			<Goal capacity="1" id="19" type="point" weight="1.00" x="42.850000" y="15.500000"/>
+			<Goal capacity="1" id="20" type="point" weight="1.00" x="10.150000" y="13.500000"/>
+			<Goal capacity="1" id="21" type="point" weight="1.00" x="10.850000" y="13.500000"/>
+			<Goal capacity="1" id="22" type="point" weight="1.00" x="34.150000" y="14.500000"/>
+			<Goal capacity="1" id="23" type="point" weight="1.00" x="34.850000" y="14.500000"/>
+			<Goal capacity="1" id="24" type="point" weight="1.00" x="69.500000" y="19.150000"/>
+			<Goal capacity="1" id="25" type="point" weight="1.00" x="69.500000" y="19.850000"/>
+			<Goal capacity="1" id="26" type="point" weight="1.00" x="81.150000" y="14.500000"/>
+			<Goal capacity="1" id="27" type="point" weight="1.00" x="81.850000" y="14.500000"/>
+			<Goal capacity="1" id="28" type="point" weight="1.00" x="23.500000" y="19.150000"/>
+			<Goal capacity="1" id="29" type="point" weight="1.00" x="23.500000" y="19.850000"/>
+			<Goal capacity="1" id="30" type="point" weight="1.00" x="47.500000" y="18.150000"/>
+			<Goal capacity="1" id="31" type="point" weight="1.00" x="47.500000" y="18.850000"/>
+			<Goal capacity="1" id="32" type="point" weight="1.00" x="42.150000" y="17.500000"/>
+			<Goal capacity="1" id="33" type="point" weight="1.00" x="42.850000" y="17.500000"/>
+			<Goal capacity="1" id="34" type="point" weight="1.00" x="13.150000" y="13.500000"/>
+			<Goal capacity="1" id="35" type="point" weight="1.00" x="13.850000" y="13.500000"/>
+			<Goal capacity="1" id="36" type="point" weight="1.00" x="13.150000" y="16.500000"/>
+			<Goal capacity="1" id="37" type="point" weight="1.00" x="13.850000" y="16.500000"/>
+			<Goal capacity="1" id="38" type="point" weight="1.00" x="38.150000" y="16.500000"/>
+			<Goal capacity="1" id="39" type="point" weight="1.00" x="38.850000" y="16.500000"/>
+			<Goal capacity="1" id="40" type="point" weight="1.00" x="27.500000" y="18.150000"/>
+			<Goal capacity="1" id="41" type="point" weight="1.00" x="27.500000" y="18.850000"/>
+			<Goal capacity="1" id="42" type="point" weight="1.00" x="60.500000" y="18.150000"/>
+			<Goal capacity="1" id="43" type="point" weight="1.00" x="60.500000" y="18.850000"/>
+			<Goal capacity="1" id="44" type="point" weight="1.00" x="68.500000" y="15.150000"/>
+			<Goal capacity="1" id="45" type="point" weight="1.00" x="68.500000" y="15.850000"/>
+			<Goal capacity="1" id="46" type="point" weight="1.00" x="35.500000" y="18.150000"/>
+			<Goal capacity="1" id="47" type="point" weight="1.00" x="35.500000" y="18.850000"/>
+			<Goal capacity="1" id="48" type="point" weight="1.00" x="32.150000" y="16.500000"/>
+			<Goal capacity="1" id="49" type="point" weight="1.00" x="32.850000" y="16.500000"/>
+			<Goal capacity="1" id="50" type="point" weight="1.00" x="61.150000" y="16.500000"/>
+			<Goal capacity="1" id="51" type="point" weight="1.00" x="61.850000" y="16.500000"/>
+			<Goal capacity="1" id="52" type="point" weight="1.00" x="21.500000" y="18.150000"/>
+			<Goal capacity="1" id="53" type="point" weight="1.00" x="21.500000" y="18.850000"/>
+			<Goal capacity="1" id="54" type="point" weight="1.00" x="84.150000" y="13.500000"/>
+			<Goal capacity="1" id="55" type="point" weight="1.00" x="84.850000" y="13.500000"/>
+			<Goal capacity="1" id="56" type="point" weight="1.00" x="25.150000" y="16.500000"/>
+			<Goal capacity="1" id="57" type="point" weight="1.00" x="25.850000" y="16.500000"/>
+			<Goal capacity="1" id="58" type="point" weight="1.00" x="65.500000" y="14.150000"/>
+			<Goal capacity="1" id="59" type="point" weight="1.00" x="65.500000" y="14.850000"/>
+		</GoalSet>
+		<!-- End delete -->
+		<!-- End of display and bench goals -->
+		<!-- BEHAVIOURS -->
+		<State name="Start" final="0" >
+			<GoalSelector type="identity"/>
+			<VelComponent type="goal"/>
 		</State>
-		<State name="Safe" final="1" />
 
-		<Transition from="Escape" to="Safe" >
-			<Condition type="goal_reached" distance="0.2" />
+		<!-- Agents choose a behaviour based on probability		 -->
+		<Transition from="Start">
+			<Condition type="auto" />
+			<Target type="prob">
+				<State name="GoEndStreet" weight="1.25"/>
+				<State name="WindowShopping" weight="0.175"/>
+				<State name="GoToDisplay" weight="0.1"/>
+				<State name="GoToBench" weight="0.1"/>
+			</Target>
 		</Transition>
+
+		<State name ="GoEndStreet" final = "0">
+			<GoalSelector type="farthest" goal_set="1"/>
+			<VelComponent type="road_map" file_name="graph.txt"/>
+		</State>
+		<State name="ReachedLeftSide" final="0">
+			<GoalSelector type="identity"/>
+			<VelComponent type="zero"/>
+			<Action type="teleport" dist="u" min_x="99.0" max_x="99.9" min_y="10.5" max_y="24.5"/>
+		</State>
+		<State name="ReachedRightSide" final="0">
+			<GoalSelector type="identity"/>
+			<VelComponent type="zero"/>
+			<Action type="teleport" dist="u" min_x="0.1" max_x="1.0" min_y="10.5" max_y="24.5"/>
+		</State>
+
+		<State name="WindowShopping" final="0">
+			<GoalSelector type="random" goal_set="2"/>
+			<VelComponent type="road_map" file_name="graph.txt"/>
+			<Action type="scale_property" property="pref_speed" dist="c" value="0.75" exit_reset="1"/>
+		</State>
+		<State name="GoToDisplay" final="0">
+			<GoalSelector type="random" goal_set="4"/>
+			<VelComponent type="road_map" file_name="graph.txt"/>
+			<Action type="scale_property" property="pref_speed" dist="c" value="0.75" exit_reset="1"/>
+		</State>
+		<State name="GoToBench" final="0">
+			<GoalSelector type="random" goal_set="5"/>
+			<VelComponent type="road_map" file_name="graph.txt"/>
+			<Action type="scale_property" property="pref_speed" dist="c" value="0.75" exit_reset="1"/>
+		</State>
+
+		<State name="AtWindow" final="0">
+			<VelComponent type="zero"/>
+		</State>
+		<State name="Decide" final="0">
+			<VelComponent type="zero"/>
+		</State>
+		<State name="Like" final="0">
+			<GoalSelector type="nearest" goal_set="3"/>
+			<VelComponent type="road_map" file_name="graph.txt"/>
+		</State>
+		<State name="InShop" final="0">
+			<VelComponent type="zero"/>
+		</State>
+
+		<State name="AtDisplay" final="0">
+			<VelComponent type="zero"/>
+		</State>
+		<State name="AtBench" final="0">
+			<VelComponent type="zero"/>
+		</State>
+
+		<Transition from="GoEndStreet" to="ReachedLeftSide">
+			<Condition type="AABB" min_x="0.0" max_x="1.0" min_y="10.0" max_y="25.0" inside="1"/>
+		</Transition>
+		<Transition from="GoEndStreet" to="ReachedRightSide">
+			<Condition type="AABB" min_x="99.0" max_x="100.0" min_y="10.0" max_y="25.0" inside="1"/>
+		</Transition>
+		<Transition from="ReachedLeftSide,ReachedRightSide" to="Start">
+			<Condition type="auto"/>
+		</Transition>
+
+		<Transition from="WindowShopping" to="AtWindow">
+			<Condition type="goal_reached" distance="0.1"/>
+		</Transition>
+		<Transition from="AtWindow" to="Decide">
+			<Condition type="timer" dist="u" min="3" max="7" seed="0" per_agent="1"/>
+		</Transition>
+		<Transition from="Decide">
+			<Condition type="auto"/>
+			<Target type="prob">
+				<State name="Like" weight="0.6"/>
+				<State name="WindowShopping" weight="0.6"/>
+				<State name="GoEndStreet" weight="0.1"/>
+				<State name="GoToDisplay" weight="0.1"/>
+				<State name="GoToBench" weight="0.1"/>
+			</Target>
+		</Transition>
+		<Transition from="Like" to="InShop">
+			<Condition type="goal_reached" distance="0.1"/>
+		</Transition>
+		<Transition from="InShop">
+			<Condition type="timer" dist="u" min="10" max="30" seed="0" per_agent="1"/>
+			<Target type="prob">
+				<State name="WindowShopping" weight="0.7"/>
+				<State name="GoEndStreet" weight="0.4"/>
+				<State name="GoToDisplay" weight="0.1"/>
+				<State name="GoToBench" weight="0.1"/>
+			</Target>
+		</Transition>
+
+		<Transition from="GoToDisplay" to="AtDisplay">
+			<Condition type="goal_reached" distance="0.01"/>
+		</Transition>
+		<Transition from="AtDisplay" to="Start">
+			<Condition type="timer" dist="n" mean="10" stddev="2" per_agent="1" />
+		</Transition>
+		<Transition from="GoToBench" to="AtBench">
+			<Condition type="goal_reached" distance="0.01"/>
+		</Transition>
+		<Transition from="AtBench" to="Start">
+			<Condition type="timer" dist="n" mean="30" stddev="5" per_agent="1" />
+		</Transition>
+
 </BFSM>

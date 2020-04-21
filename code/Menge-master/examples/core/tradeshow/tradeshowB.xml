@@ -43,7 +43,7 @@
         <Goal capacity="10000" id="40" type="AABB" weight="1.00" max_x="21.50" min_x="20.51" max_y="-15.91" min_y="-18.43"/>
         <Goal capacity="10000" id="41" type="AABB" weight="1.00" max_x="19.60" min_x="18.75" max_y="7.24" min_y="4.45"/>
 	</GoalSet>
-	
+
 		<State name="Walk" final="0" >
 			<GoalSelector type="random" goal_set="0" per_agent="1" />
 			<VelComponent type="nav_mesh" file_name="tradeshow.nav" heading_threshold="5"/>
