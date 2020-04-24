@@ -2,7 +2,7 @@
 
 <Experiment version="2.0">
 	<SpatialQuery type="kd-tree" test_visibility="false" />
-	
+
     <OpenSteer max_force="8" leak_through="0.1" reaction_time="0.5" />
     <Common time_step="0.1" />
     <GCF reaction_time="0.5" max_agent_dist="2" max_agent_force="3" agent_interp_width="0.1" agent_force_strength="0.35" />
@@ -35,12 +35,12 @@
     </AgentGroup>
 
 	
-    <ObstacleSet type="explicit" class="1"> 
+    <ObstacleSet type="explicit" class="1">
 	  <Obstacle closed="1"  >
 		<Vertex p_x = "0" p_y = "5"/>
 		<Vertex p_x = "5" p_y = "0"/>
 		<Vertex p_x = "0" p_y = "-5"/>
-		<Vertex p_x = "-5" p_y = "0"/> 
+		<Vertex p_x = "-5" p_y = "0"/>
 	  </Obstacle>
 	</ObstacleSet>
 </Experiment>

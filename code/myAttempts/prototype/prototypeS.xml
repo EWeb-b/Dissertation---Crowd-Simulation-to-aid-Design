@@ -58,10 +58,10 @@
 				<Vertex p_x="2" p_y="10.5" />
 			</Obstacle>
 			<Obstacle closed="1">
-				<Vertex p_x="5" p_y="8" />
-				<Vertex p_x="0" p_y="8" />
-				<Vertex p_x="0" p_y="3" />
-				<Vertex p_x="5" p_y="3" />
+				<Vertex p_x="7" p_y="5" />
+				<Vertex p_x="2" p_y="5" />
+				<Vertex p_x="2" p_y="0" />
+				<Vertex p_x="7" p_y="0" />
 			</Obstacle>
 		</ObstacleSet>
 

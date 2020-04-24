@@ -7,7 +7,7 @@ obs = []
 
 def buildDisplay():
     print ('Building display...')
-    bLX = random.randint(10, 90) - 0.5
+    bLX = random.randint(5, 90) - 0.5
     bLY = random.randint(14, 16) - 0.5
     displayPoly = Polygon([(bLX,bLY), (bLX+5,bLY), (bLX+5,bLY+5), (bLX,bLY+5)])
     print (list(displayPoly.exterior.coords))
@@ -15,7 +15,7 @@ def buildDisplay():
 
 def buildBench():
     print('Building bench...')
-    bLX = random.randint(10, 90) - 0.5
+    bLX = random.randint(5, 93) - 0.5
     bLY = random.randint(14, 19) - 0.5
     portrait = random.randint(0,1)
     if portrait is 1:
@@ -35,22 +35,6 @@ def modifyBench(bench):
         return thinBenchPoly
     else:
         return bench
-
-
-# def buildBench():
-#     print('Building bench...')
-#     portrait = random.randint(0,1)
-#     if portrait is 1:
-#         bLX = random.randint(10, 90) - 0.25
-#         bLY = random.randint(14, 19) - 0.5
-#         benchPoly = Polygon([(bLX,bLY), (bLX+0.5,bLY), (bLX+0.5,bLY+2), (bLX,bLY+2)])
-#     else:
-#         bLX = random.randint(10, 90) - 0.5
-#         bLY = random.randint(14, 19) - 0.25
-#         benchPoly = Polygon([(bLX,bLY), (bLX+2,bLY), (bLX+2,bLY+0.5), (bLX,bLY+0.5)])
-#     print (list(benchPoly.exterior.coords))
-#     return benchPoly
-
 
 def isValidPlacement(current):
     print ('isValidPlacement start')

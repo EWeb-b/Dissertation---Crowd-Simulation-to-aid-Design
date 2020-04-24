@@ -33,10 +33,10 @@ def placeDisplayGoals(displays):
     output += '\t\t<GoalSet id="4">'
     count = 0
     for display in displays:
-        output += '\n\t\t\t<Goal capacity="5" id="%d" max_x="%f" min_x="%f" max_y="%f" min_y="%f" type="AABB" weight="1.00"/>' % (count, display[1][0]-0.5, display[0][0]+0.5, display[0][1], display[1][1]-0.5)
-        output += '\n\t\t\t<Goal capacity="5" id="%d" max_x="%f" min_x="%f" max_y="%f" min_y="%f" type="AABB" weight="1.00"/>' % (count+1, display[1][0]+0.5, display[2][0], display[2][1]-0.5, display[1][1]+0.5)
-        output += '\n\t\t\t<Goal capacity="5" id="%d" max_x="%f" min_x="%f" max_y="%f" min_y="%f" type="AABB" weight="1.00"/>' % (count+2, display[1][0]-0.5, display[0][0]+0.5, display[3][1]+0.5, display[2][1])
-        output += '\n\t\t\t<Goal capacity="5" id="%d" max_x="%f" min_x="%f" max_y="%f" min_y="%f" type="AABB" weight="1.00"/>' % (count+3, display[0][0], display[0][0]-0.5, display[3][1]-0.5, display[0][1]+0.5)
+        output += '\n\t\t\t<Goal capacity="8" id="%d" max_x="%f" min_x="%f" max_y="%f" min_y="%f" type="AABB" weight="1.00"/>' % (count, display[1][0]-0.5, display[0][0]+0.5, display[0][1], display[1][1]-0.5)
+        output += '\n\t\t\t<Goal capacity="8" id="%d" max_x="%f" min_x="%f" max_y="%f" min_y="%f" type="AABB" weight="1.00"/>' % (count+1, display[1][0]+0.5, display[2][0], display[2][1]-0.5, display[1][1]+0.5)
+        output += '\n\t\t\t<Goal capacity="8" id="%d" max_x="%f" min_x="%f" max_y="%f" min_y="%f" type="AABB" weight="1.00"/>' % (count+2, display[1][0]-0.5, display[0][0]+0.5, display[3][1]+0.5, display[2][1])
+        output += '\n\t\t\t<Goal capacity="8" id="%d" max_x="%f" min_x="%f" max_y="%f" min_y="%f" type="AABB" weight="1.00"/>' % (count+3, display[0][0], display[0][0]-0.5, display[3][1]-0.5, display[0][1]+0.5)
         count = count + 4
     output += '\n\t\t</GoalSet>'
     return output

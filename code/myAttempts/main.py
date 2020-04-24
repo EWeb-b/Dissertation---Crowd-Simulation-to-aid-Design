@@ -16,9 +16,9 @@ sys.path.insert(1, 'C:/Users/Ed/Desktop/FinalYearProject/code/MengeUtils')
 import AnalysisTask
 
 # Run the simulator
-# subprocess.check_call([r"C:\Users\Ed\Desktop\FinalYearProject\code\Menge-master\Exe\menge.exe",
-#         "-p", r"C:\Users\Ed\Desktop\FinalYearProject\code\myAttempts\shoppingStreet.xml",
-#                 "-o", r"C:\Users\Ed\Desktop\FinalYearProject\code\myAttempts\shoppingStreetSCB.scb"])
+subprocess.check_call([r"C:\Users\Ed\Desktop\FinalYearProject\code\Menge-master\Exe\menge.exe",
+        "-p", r"C:\Users\Ed\Desktop\FinalYearProject\code\myAttempts\shoppingStreet.xml",
+                "-o", r"C:\Users\Ed\Desktop\FinalYearProject\code\myAttempts\shoppingStreet/shoppingStreetSCB.scb"])
 
 # Analyse the flow of the simulation and return the path to the flow file.
 # wPath = AnalysisTask.main()
@@ -28,15 +28,15 @@ import AnalysisTask
 # score = calcScore.calcScore(wPath)
 # print 'Score for ' + wPath + ': %.4f' % score
 
-newObstacles = obstacle.constructObs(3, 30)
-modifyGoals.placeNewGoals(newObstacles, 3, 30)
+newObstacles = obstacle.constructObs(4, 26)
+modifyGoals.placeNewGoals(newObstacles, 4, 26)
 modifyRoadmap.resetRoadmap()
 
 obsXML = obstacle.convertToXML(newObstacles)
 replaceObsText.delObsXML()
 replaceObsText.writeObsXML(obsXML)
 
-goalsXML = modifyGoals.placeNewGoals(newObstacles, 3 , 30)
+goalsXML = modifyGoals.placeNewGoals(newObstacles, 4 , 26)
 replaceGoalsText.delGoalsXML()
 replaceGoalsText.writeGoalsXML(goalsXML)
 
