@@ -1,10 +1,14 @@
+# File for building the goals for each random obstacle.
+
 import random
 
+# Builds and returns XML defining the goals for every bench obstacle.
 def placeBenchGoals(benches):
     output = ''
     output += '\t\t<GoalSet id="5">'
     count = 0
     for bench in benches:
+        # Randomly assign one side of the bench as the 'sitting side'.
         side = random.randint(0, 1)
         if bench[1][0] - bench[0][0] == 0.5:
             if side is 1:
@@ -28,6 +32,7 @@ def placeBenchGoals(benches):
     output += '\n\t\t</GoalSet>'
     return output
 
+# Builds and returns XML defining the goals for every unit obstacle.
 def placeDisplayGoals(displays):
     output = ''
     output += '\t\t<GoalSet id="4">'

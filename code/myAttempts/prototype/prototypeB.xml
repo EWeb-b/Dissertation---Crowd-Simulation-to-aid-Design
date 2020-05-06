@@ -8,8 +8,8 @@
 
 		<State name="Escape" final="0" >
 			<GoalSelector type="explicit" goal_set="0" goal="0" />
-			<!-- <VelComponent type="goal" weight="1.0" /> -->
 			<VelComponent type="road_map" file_name="graph.txt" />
+			<!-- <VelComponent type="goal" weight="1.0" /> -->
 		</State>
 		<State name="Safe" final="1" />
 

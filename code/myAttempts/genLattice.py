@@ -1,3 +1,5 @@
+# Simple script for generating a grid lattice for the base roadmap graph.
+
 startY = 25
 offsetStartY = 24.5
 offsetEndY = 10.5

@@ -1,3 +1,4 @@
+# File to delete and replace the existing goals for the random obstacles
 
 # First delete the display and bench goals already there
 def delGoalsXML():

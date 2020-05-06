@@ -29,18 +29,28 @@
 	<AgentGroup>
         <ProfileSelector name="group1" type="const" />
 		<StateSelector name="Escape" type="const" />
-		<Generator displace_dist="u" displace_max="0.5" displace_min="0" type="explicit">
-			<Agent p_x="-7" p_y="-8" />
+		<Generator type="explicit">
+			<Agent p_x="-7" p_y="-8" /> <!-- orignal -->
+			<Agent p_x="-6" p_y="-9" />
+			<Agent p_x="-5" p_y="-7" />
+			<Agent p_x="-2" p_y="-8" />
+			<Agent p_x="-1" p_y="-8" />
+			<Agent p_x="-3" p_y="-6" />
 		</Generator>
-    </AgentGroup>
+  </AgentGroup>
 
-    <AgentGroup>
+  <AgentGroup>
         <StateSelector name="Escape" type="const" />
 		<ProfileSelector name="group2" type="const" />
 		<Generator type="explicit">
-			<Agent p_x="3" p_y="-9" />
+			<Agent p_x="3" p_y="-9" /> <!-- original -->
+			<Agent p_x="5" p_y="-8" />
+			<Agent p_x="6" p_y="-9" />
+			<Agent p_x="8" p_y="-7" />
+			<Agent p_x="9" p_y="-8" />
+			<Agent p_x="4" p_y="-7" />
 		</Generator>
-    </AgentGroup>
+  </AgentGroup>
 
     <ObstacleSet class="1" type="explicit">
 			<Obstacle closed="1">
@@ -58,10 +68,10 @@
 				<Vertex p_x="2" p_y="10.5" />
 			</Obstacle>
 			<Obstacle closed="1">
-				<Vertex p_x="7" p_y="5" />
-				<Vertex p_x="2" p_y="5" />
-				<Vertex p_x="2" p_y="0" />
-				<Vertex p_x="7" p_y="0" />
+				<Vertex p_x="2" p_y="6" />
+				<Vertex p_x="-3" p_y="6" />
+				<Vertex p_x="-3" p_y="1" />
+				<Vertex p_x="2" p_y="1" />
 			</Obstacle>
 		</ObstacleSet>
 

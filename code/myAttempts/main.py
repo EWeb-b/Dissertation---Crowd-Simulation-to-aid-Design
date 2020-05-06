@@ -1,47 +1,51 @@
-import obstacle
-import modifyGoals
-import modifyRoadmap
-import replaceObsText
-import replaceGoalsText
 import imp
+import errno
+import os
 import sys
 import subprocess
-import changeConfig
-import calcScore
+import averageWalkingTimes
+import performAnalysisTasks
+import modObsGoalsRoadmap
 
-# TODO: change analysistask.py's main method to shoppingStreet
-# make flow config fie forshoppign street
+pedModels = ['helbing', 'pedvo', 'orca', 'zanlungo', 'gcf', 'karamouzas', 'johannson']
 
-sys.path.insert(1, 'C:/Users/Ed/Desktop/FinalYearProject/code/MengeUtils')
-import AnalysisTask
+if len(sys.argv) != 4:
+    raise IOError(errno.EINVAL, os.strerror(errno.EINVAL),
+        "Usage: python performAnalysisTasks.py numUnits<int> numBenches<int> pedModel<string>")
+numUnits = int(sys.argv[1])
+numBenches = int(sys.argv[2])
+pedModel = sys.argv[3]
+if not isinstance(numUnits, int):
+    raise IOError(errno.EINVAL, os.strerror(errno.EINVAL),
+                    "Invalid integer entered for the number of units.")
+if not isinstance(numBenches, int):
+    raise IOError(errno.EINVAL, os.strerror(errno.EINVAL),
+                    "Invalid integer entered for the number of benches.")
+if (int(sys.argv[1]) > 10):
+    raise IOError(errno.EINVAL, os.strerror(errno.EINVAL),
+                    "The number of units is too high. Max number 10.")
+if (int(sys.argv[2]) > 70):
+    raise IOError(errno.EINVAL, os.strerror(errno.EINVAL),
+                    "The number of benches is too high. Max number 70.")
+if (pedModel not in pedModels):
+    raise IOError(errno.EINVAL, os.strerror(errno.EINVAL),
+                    "Invalid pedestrian model entered. Options: " + pedModels)
 
-# Run the simulator
-subprocess.check_call([r"C:\Users\Ed\Desktop\FinalYearProject\code\Menge-master\Exe\menge.exe",
-        "-p", r"C:\Users\Ed\Desktop\FinalYearProject\code\myAttempts\shoppingStreet.xml",
-                "-o", r"C:\Users\Ed\Desktop\FinalYearProject\code\myAttempts\shoppingStreet/shoppingStreetSCB.scb"])
+currWD = os.getcwd()
+mengePath = (os.path.join(os.path.dirname(currWD), 'Menge-master', 'Exe', 'menge.exe'))
+shoppingStreetXMLPath = (os.path.join(currWD, 'shoppingStreet', 'shoppingStreet.xml'))
+scbPath = os.path.join(currWD, 'shoppingStreet', 'shoppingStreetSCB.scb')
+workPath = os.path.join(currWD, 'analysisResults')
 
-# Analyse the flow of the simulation and return the path to the flow file.
-# wPath = AnalysisTask.main()
-# print 'wpath: ' + wPath
+#Run the simulator
+subprocess.check_call([mengePath, "-p", shoppingStreetXMLPath, "-o", scbPath, "-m", pedModel])
 
-# Calculate the score of the scenario from the flow file.
-# score = calcScore.calcScore(wPath)
-# print 'Score for ' + wPath + ': %.4f' % score
+# Perform the flow lines, density, and fundamental diagrams analyses tasks
+performAnalysisTasks.main(scbPath, workPath)
 
-newObstacles = obstacle.constructObs(4, 26)
-modifyGoals.placeNewGoals(newObstacles, 4, 26)
-modifyRoadmap.resetRoadmap()
+# Calculate the Walking data and plot the graphs
+data, aveTime = averageWalkingTimes.main(scbPath)
+averageWalkingTimes.plotWalkingData(data, aveTime, workPath)
 
-obsXML = obstacle.convertToXML(newObstacles)
-replaceObsText.delObsXML()
-replaceObsText.writeObsXML(obsXML)
-
-goalsXML = modifyGoals.placeNewGoals(newObstacles, 4 , 26)
-replaceGoalsText.delGoalsXML()
-replaceGoalsText.writeGoalsXML(goalsXML)
-
-modifyRoadmap.calculateRoadmap(newObstacles)
-
-# Change the analysis output location
-# NOTE: could be using something like task.setTaskName( 'lores' ) in AnalysisTask
-#changeConfig.changeConfig(r'C:\Users\Ed\Desktop\FinalYearProject\code\myAttempts\prototype\flowConfig.cfg', 1)
+# Move the random obstacles and adjust the roadmap to fit around them.
+modObsGoalsRoadmap.main(numUnits,numBenches)

@@ -1,12 +1,5 @@
-import sys
-import obstacle
-import modifyRoadmap
-sys.path.insert(1, 'C:/Users/Ed/Desktop/FinalYearProject/code/MengeUtils')
-import obst2XML
+# File to delete and replace the existing obstacles XML for the new random obstacles XML
 
-
-#obst2XML.convert('testObstacle.txt')
-#modifyRoadmap.resetRoadmap()
 # First delete the random obstacles already there
 def delObsXML():
     startMarker = '<!-- Start delete -->'
@@ -29,8 +22,6 @@ def writeObsXML(obsXML):
     startPoint = '<!-- Start of random obstacles -->'
     endPoint = '<!-- End of random obstacles -->'
     writeFlag = False
-    # newObstacles = obstacle.constructObs(3, 15)
-    # obsXML = obstacle.convertToXML(newObstacles)
     with open('shoppingStreet/shoppingStreetS.xml', 'r') as f3:
         lines = f3.readlines()
 
@@ -41,6 +32,3 @@ def writeObsXML(obsXML):
                 f4.write('\t\t<!-- Start delete -->\n')
                 f4.write(obsXML)
                 f4.write('\t\t<!-- End delete -->\n')
-                #f2.write(line)
-
-#modifyRoadmap.calculateRoadmap(newObstacles)

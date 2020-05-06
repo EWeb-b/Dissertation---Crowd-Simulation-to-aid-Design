@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<Project
+	scene="shoppingStreetS.xml"
+	behavior="shoppingStreetB.xml"
+	view="shoppingStreetV.xml"
+	model="orca"
+	dumpPath="images/shoppingStreet"
+/>
